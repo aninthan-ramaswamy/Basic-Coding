@@ -1,0 +1,83 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Fibonacci
+
+```{r}
+fib <- numeric(10)
+fib[1] <- 1
+fib[2] <- 1
+
+for(i in 3:10) fib[i] <- fib[i-1] + fib[i-2]
+
+fib
+```
+
+Get all prime numbers up to a given number (based on the sieve of Eratosthenes).
+
+
+```{r}
+prime_numbers <- function(n){
+  if( n >= 2){
+    num <- seq(2,n)
+    prime_nums <- c()
+    for(i in seq(2,n)){
+      if(any(num == i)){
+        prime_nums <- c(prime_nums, i)
+        num <- c(num[(num %% i) != 0], i)
+      }
+    }
+  }
+  return(prime_nums)
+}
+
+
+prime_numbers(12)
+```
+
+-----------------------------
+
+Random number generation
+
+```{r}
+
+sample(x = seq(1,10), size = 5)
+
+runif(n = 10, min =-50, max = 50)
+rnorm(n = 10, mean = 10, sd = 10)
+#standard normal
+rnorm(n = 10)
+
+#Bernouli Trial (say heads/tails)
+#n = number of trials
+rbinom(size = 1, n = 1, prob = 0.5)
+#1 trial of selection p values from size
+rbinom(size = 10, n = 1, prob = 0.5)
+
+
+rbinom(n = 100, size = 5, 0.25)
+```
+
+Adding a curve to the fit
+
+```{r}
+norm <- rnorm(n = 1000)
+hist(norm, probability = T)
+lines(density(norm))
+```
+
+-------------------------------------------------------------
+
+Creating a simple matrix
+
+```{r}
+
+values <- seq(1,12)
+row_names <- c("Row1", "Row2", "Row3")
+col_names <- c("Col1", "Col2", "Col3")
+
+matrix_values <- matrix(values, nrow = 3, ncol = 3, byrow = TRUE, dimnames = list(row_names, col_names))
+```
+
